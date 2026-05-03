@@ -1,0 +1,245 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+
+  /* Fumble retro ticket palette */
+  --paper: #f6eedd;
+  --paper-deep: #eddfc0;
+  --paper-edge: #e0cb98;
+  --ink: #2a1810;
+  --ink-soft: #4a3024;
+  --ink-faint: #8a6b52;
+  --gold: #b8860b;
+  --gold-deep: #8a6508;
+  --gold-light: #e6c463;
+  --crimson: #8b1e3f;
+  --crimson-deep: #5e1029;
+  --stamp-red: #c0392b;
+  --bone: #fdf9f0;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--bone);
+  --card-foreground: var(--ink);
+  --popover: var(--bone);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--bone);
+  --secondary: var(--paper-deep);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-deep);
+  --muted-foreground: var(--ink-faint);
+  --accent: var(--gold-light);
+  --accent-foreground: var(--ink);
+  --destructive: var(--crimson);
+  --destructive-foreground: var(--bone);
+  --border: rgba(42, 24, 16, 0.18);
+  --input: transparent;
+  --input-background: rgba(255, 255, 255, 0.4);
+  --switch-background: var(--paper-edge);
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: var(--gold);
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-ring: var(--ring);
+
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-paper-edge: var(--paper-edge);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-gold: var(--gold);
+  --color-gold-deep: var(--gold-deep);
+  --color-gold-light: var(--gold-light);
+  --color-crimson: var(--crimson);
+  --color-crimson-deep: var(--crimson-deep);
+  --color-stamp-red: var(--stamp-red);
+  --color-bone: var(--bone);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-serif-cn: "Noto Serif SC", "Songti SC", serif;
+  --font-serif-en: "Cormorant Garamond", "Times New Roman", serif;
+  --font-mono-stamp: "Special Elite", "Courier New", monospace;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    font-size: var(--font-size);
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-serif-cn);
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(184, 134, 11, 0.04) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(139, 30, 63, 0.03) 0%, transparent 40%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.165 0 0 0 0 0.094 0 0 0 0 0.063 0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    color: var(--ink);
+  }
+
+  h1 { font-family: var(--font-serif-cn); font-size: var(--text-2xl); font-weight: 600; line-height: 1.4; letter-spacing: 0.02em; }
+  h2 { font-family: var(--font-serif-cn); font-size: var(--text-xl); font-weight: 500; line-height: 1.4; letter-spacing: 0.02em; }
+  h3 { font-family: var(--font-serif-cn); font-size: var(--text-lg); font-weight: 500; line-height: 1.5; }
+  h4 { font-family: var(--font-serif-cn); font-size: var(--text-base); font-weight: 500; line-height: 1.5; }
+  label { font-size: var(--text-base); font-weight: 500; line-height: 1.5; }
+  button { font-size: var(--text-base); font-weight: 500; line-height: 1.5; font-family: var(--font-serif-cn); }
+  input, textarea { font-size: var(--text-base); font-weight: 400; line-height: 1.5; font-family: var(--font-serif-cn); }
+}
+
+/* ── Fumble custom utilities ── */
+
+/* paper texture overlay */
+.paper-texture {
+  position: relative;
+}
+.paper-texture::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.165 0 0 0 0 0.094 0 0 0 0 0.063 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode: multiply;
+  opacity: 0.6;
+  border-radius: inherit;
+}
+
+/* perforated ticket edge - top/bottom */
+.ticket-edge-tb {
+  --c: var(--paper);
+  background:
+    radial-gradient(circle at 50% 0, transparent 5px, var(--c) 5.5px) 0 0/14px 8px repeat-x,
+    radial-gradient(circle at 50% 100%, transparent 5px, var(--c) 5.5px) 0 100%/14px 8px repeat-x;
+}
+
+/* dashed perforation line */
+.ticket-perf {
+  background-image: linear-gradient(to right, var(--ink) 50%, transparent 50%);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  background-position: center;
+}
+
+.ticket-perf-v {
+  background-image: linear-gradient(to bottom, var(--ink) 50%, transparent 50%);
+  background-size: 1px 8px;
+  background-repeat: repeat-y;
+  background-position: center;
+}
+
+/* ornate gold border */
+.gold-border {
+  border: 2px solid var(--gold);
+  box-shadow:
+    inset 0 0 0 1px var(--paper),
+    inset 0 0 0 3px var(--gold-deep),
+    0 4px 16px rgba(42, 24, 16, 0.15);
+}
+
+/* ink stamp (red rubber stamp look) */
+.ink-stamp {
+  font-family: var(--font-mono-stamp);
+  color: var(--stamp-red);
+  border: 2px solid var(--stamp-red);
+  padding: 2px 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  transform: rotate(-6deg);
+  filter: contrast(1.1);
+  display: inline-block;
+}
+.ink-stamp-circle {
+  font-family: var(--font-mono-stamp);
+  color: var(--stamp-red);
+  border: 2.5px solid var(--stamp-red);
+  width: 64px; height: 64px;
+  border-radius: 9999px;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; line-height: 1;
+  letter-spacing: 0.05em;
+  opacity: 0.82;
+  transform: rotate(-12deg);
+  filter: contrast(1.1);
+}
+
+/* gold foil shimmer (for legendary tickets) */
+.gold-foil {
+  background: linear-gradient(
+    110deg,
+    #b8860b 0%,
+    #f1d57a 25%,
+    #fff8c4 40%,
+    #f1d57a 55%,
+    #b8860b 75%,
+    #8a6508 100%
+  );
+  background-size: 200% 100%;
+  animation: foil-shimmer 4s linear infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@keyframes foil-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.foil-bg {
+  background: linear-gradient(110deg, #d4a017, #fff2b3 30%, #ffe580 50%, #d4a017 70%, #8a6508);
+  background-size: 200% 100%;
+  animation: foil-shimmer 5s linear infinite;
+}
+
+/* serial code monospace */
+.serial {
+  font-family: var(--font-mono-stamp);
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+}
+
+/* en-serif for numerals & decorative latin */
+.en-serif { font-family: var(--font-serif-en); }
+.stamp-font { font-family: var(--font-mono-stamp); letter-spacing: 0.1em; }
+
+/* subtle vignette */
+.vignette {
+  box-shadow: inset 0 0 80px rgba(42, 24, 16, 0.18);
+}
+
+/* hide scrollbar */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
